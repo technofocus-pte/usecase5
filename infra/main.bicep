@@ -34,12 +34,12 @@ param deploymentType string = 'GlobalStandard'
 @minLength(1)
 @description('Optional. Name of the GPT model to deploy:')
 @allowed([
-  'gpt-4.1-mini'
+  'gpt-5.2'
 ])
-param gptModelName string = 'gpt-4.1-mini'
+param gptModelName string = 'gpt-5.2'
 
 @description('Optional. Version of the GPT model to deploy.')
-param gptModelVersion string = '2025-04-14'
+param gptModelVersion string = '2025-12-11'
 
 @description('Optional. Capacity of the GPT model deployment:')
 @minValue(10)
@@ -95,7 +95,7 @@ param enableScalability bool = false
   azd: {
     type: 'location'
     usageName: [
-      'OpenAI.GlobalStandard.gpt4.1-mini,150'
+      'OpenAI.GlobalStandard.gpt-5.2,150'
       'OpenAI.GlobalStandard.text-embedding-3-large,100'
     ]
   }
@@ -534,11 +534,11 @@ module avmAppConfig 'br/public:avm/res/app-configuration/configuration-store:0.9
         value: enableMonitoring ? applicationInsights!.outputs.connectionString : ''
       }
       {
-        name: 'Application:AIServices:GPT-4o-mini:Endpoint'
+        name: 'Application:AIServices:gpt-5.2:Endpoint'
         value: avmOpenAi.outputs.endpoint
       }
       {
-        name: 'Application:AIServices:GPT-4o-mini:ModelName'
+        name: 'Application:AIServices:gpt-5.2:ModelName'
         value: gptModelDeployment.modelName
       }
       {
@@ -1121,10 +1121,10 @@ output AZURE_OPENAI_SERVICE_ENDPOINT string = avmOpenAi.outputs.endpoint
 @description('Contains Azure Search Service Endpoint.')
 output AZ_SEARCH_SERVICE_ENDPOINT string = avmSearchSearchServices.name
 
-@description('Contains Azure GPT-4o Model Deployment Name.')
+@description('Contains Azure GPT-5.2 Model Deployment Name.')
 output AZ_GPT4O_MODEL_ID string = gptModelDeployment.deploymentName
 
-@description('Contains Azure GPT-4o Model Name.')
+@description('Contains Azure GPT-5.2 Model Name.')
 output AZ_GPT4O_MODEL_NAME string = gptModelDeployment.modelName
 
 @description('Contains Azure OpenAI Embedding Model Name.')
